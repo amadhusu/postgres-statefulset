@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: crunchy-pgadmin4
+  namespace: database
+spec:
+    env:
+      - name: PGADMIN_DEFAULT_EMAIL
+        value: user@domain.com
+      - name: PGADMIN_DEFAULT_PASSWORD
+        valueFrom:
+        secretKeyRef:
+          name: pgadmin
+          key: pgadmin-password
+    containers:
+      - name: web
+        image: registry.connect.redhat.com/crunchydata/crunchy-pgadmin4
+
+    imagePullSecrets:
+      - name: achyutm6-secret
